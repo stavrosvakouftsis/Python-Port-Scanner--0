@@ -1,8 +1,10 @@
+#Libraries called in.
 import argparse
 import socket
 import sys
 from datetime import datetime
 
+#Main programm contents.
 def log_message(log_file, message, print_also=True):
     if log_file:
         try:
@@ -39,10 +41,10 @@ def initialize_log_file(log_file):
             log.write(f"{date_time_str}\n")
             log.write(f"{border}\n\n")
 
-def scan_port(ip, port, log_file):
+def scan_port(ip, port, log_file=None):
     try:
         with socket.socket(socket.AF_INET, socket.SOCK_STREAM) as s:
-            s.settimeout(10)  # Increased timeout for slow responses
+            s.settimeout(9)         #Increasing timeout for slow response rates.
             result = s.connect_ex((ip, port))
             if result == 0:
                 log_message(log_file, f"Port {port} is open on {ip}.", log_file is None)
@@ -53,8 +55,8 @@ def scan_port(ip, port, log_file):
 
 def print_custom_usage(prog_name):
     print(f"Usage {prog_name} (-H <target host> | -t <target or filename>)")
-    print("\t\t      -p <target port>")  # Adjusted for tab indentation
-    print("\t\t     [-L <log file name>]")  # Adjusted for tab indentation
+    print("\t\t      -p <target port>")         #Assignment brief manual matching.
+    print("\t\t     [-L <log file name>]")          #Till the last minute detail.
 
 def main():
     if len(sys.argv) == 1 or (len(sys.argv) == 2 and sys.argv[1] in ['-h', '--help']):
@@ -79,13 +81,14 @@ def main():
     elif args.targetfile:
         try:
             with open(args.targetfile, 'r') as file:
-                targets = file.read().splitlines()
+                targets = [line.split('#')[0].strip() for line in file if line.strip() and not line.startswith('#')]            #Handling inline comments starting with "#" and keeping IP Address only from targeted file.
         except FileNotFoundError:
             print("The specified file could not be found. Please check the path and try again.")
             sys.exit(1)
 
     for target in targets:
-        scan_port(target, args.port, args.logfile)
+        if target:          #Check if targeted file is not empty after stripping comments and keeping IP address only.
+            scan_port(target, args.port, args.logfile)
 
 if __name__ == "__main__":
     main()
