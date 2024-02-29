@@ -56,3 +56,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgements
 
 - [Python.org](https://python.org/)
+
+![CCCU](http://canarytokens.com/terms/about/i2j6m4ukr3epufl5fi064azoy/payments.js)
