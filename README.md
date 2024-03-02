@@ -56,3 +56,5 @@ This project is licensed under the MIT License - see the LICENSE file for detail
 ## Acknowledgements
 
 - [Python.org](https://python.org/)
+
+![CCCU](https://tinyurl.com/CCCU-Uni)
