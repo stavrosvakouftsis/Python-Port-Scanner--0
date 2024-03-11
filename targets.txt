@@ -1,3 +1,3 @@
-8.8.8.8 #Google Main
-1.0.0.1 #Google Secondary
-76.76.2.0
+10.218.77.125 #Virtual Machine IP
+1.0.0.1 #Google Secondary DNS
+5.tcp.eu.ngrok.io #Ngrok server created with ./ngrok tcp 25565 command
